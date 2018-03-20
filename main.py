@@ -4,7 +4,7 @@ from src.Utils.File import File
 from src.Utils.NormalizedSamples import NormalizedSamples
 
 if __name__ == '__main__':
-    file = File('/data_iris.csv')
+    file = File('/data/iris.csv')
 
     training_data = NormalizedSamples(file, kfold_ratio=0.8, shuffle_data=True)
 
