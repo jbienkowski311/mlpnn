@@ -20,7 +20,8 @@ class LayerTest(unittest.TestCase):
         neuron2 = Neuron(2)
 
         synapse = Synapse(neuron1, neuron2, initial_weight=0.5)
-        synapse.update_weight(0.5)
+        synapse.store_weight(0.5)
+        synapse.update_weight()
 
         self.assertEqual(1.0, synapse.weight)
 
