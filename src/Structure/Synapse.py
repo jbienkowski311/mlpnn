@@ -3,6 +3,11 @@ class Synapse(object):
         self.previous = input_neuron
         self.next = output_neuron
         self.weight = initial_weight
+        self.weights = list()
 
-    def update_weight(self, weight_change):
-        self.weight += weight_change
+    def store_weight(self, weight):
+        self.weights.append(weight)
+
+    def update_weight(self):
+        self.weight += sum(self.weights) / float(len(self.weights))
+        self.weights = list()

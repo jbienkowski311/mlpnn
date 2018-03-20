@@ -4,7 +4,7 @@ from src.Structure.MLP import MLP
 
 class MLPFactory(object):
     @staticmethod
-    def create(neurons_list):
+    def create(neurons_list, training_strategy=MLP.ONLINE_TRAINING):
         layers = list()
 
         for number_of_neurons in neurons_list:
@@ -19,4 +19,4 @@ class MLPFactory(object):
                 layers[index].connect_input(layers[index - 1])
                 layers[index].connect_output(layers[index + 1])
 
-        return MLP(layers)
+        return MLP(layers, training=training_strategy)

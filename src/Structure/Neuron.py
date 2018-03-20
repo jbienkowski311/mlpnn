@@ -4,10 +4,8 @@ from src.Factories.SynapseFactory import SynapseFactory
 
 
 class Neuron(object):
-    def __init__(self, id, learning_rate=0.001, beta=0.05):
+    def __init__(self, id):
         self.id = id
-        self.learning_rate = learning_rate
-        self.beta = beta
         self.layer = None
         self.input_connections = list()
         self.output_connections = list()
@@ -25,7 +23,11 @@ class Neuron(object):
         neuron.input_connections.append(synapse)
 
     def calculate_sum(self):
-        self.weighted_sum = sum(map(lambda synapse: synapse.previous.output * synapse.weight, self.input_connections))
+        self.weighted_sum = sum(
+            map(
+                lambda synapse: synapse.previous.output * synapse.weight, self.input_connections
+            )
+        )
 
     def calculate_output(self):
         self.output = self._activation_function(self.weighted_sum)
@@ -35,13 +37,23 @@ class Neuron(object):
 
     def calculate_delta(self):
         self.delta = sum(
-            map(lambda synapse: synapse.next.delta * synapse.weight * (1 - synapse.next.output) * synapse.next.output,
-                self.output_connections))
+            map(
+                lambda synapse:
+                synapse.next.delta * synapse.weight * (1 - synapse.next.output) * synapse.next.output,
+                self.output_connections
+            )
+        )
 
-    def calculate_correction(self, learning_rate=0.05):
+    def calculate_correction(self, apply_correction=False, learning_rate=0.05):
         for synapse in self.input_connections:
             weight_correction = learning_rate * self.delta * (1 - self.output) * self.output * synapse.previous.output
-            synapse.update_weight(weight_correction)
+            synapse.store_weight(weight_correction)
+            if apply_correction:
+                synapse.update_weight()
 
-    def _activation_function(self, x):
-        return 1 / (1 + exp(-0.005 * x))
+    def apply_correction(self):
+        for synapse in self.input_connections:
+            synapse.update_weight()
+
+    def _activation_function(self, x, beta=0.005):
+        return 1 / (1 + exp(-beta * x))

@@ -2,19 +2,28 @@ import operator
 
 
 class MLP(object):
-    ONLINE = 1
-    OFFLINE = 2
+    ONLINE_TRAINING = 1
+    OFFLINE_TRAINING = 2
 
-    def __init__(self, layers):
+    def __init__(self, layers, training=ONLINE_TRAINING):
         self.layers = layers
         self.input_layer = layers[0]
         self.output_layer = layers[-1]
+        self.training = training
 
     def train(self, train_data, train_labels, epochs=1):
         for _ in range(epochs):
             for i in range(len(train_data)):
                 self._feedforward(train_data[i])
                 self._backpropagation(train_labels[i])
+
+            if self.training == self.OFFLINE_TRAINING:
+                self._apply_weights_correction()
+
+    def _apply_weights_correction(self):
+        for layer in self.layers[:-1]:
+            for neuron in layer.neurons:
+                neuron.apply_correction()
 
     def predict(self, input_data):
         self._feedforward(input_data)
@@ -59,10 +68,17 @@ class MLP(object):
     def _set_deltas(self, labels):
         for index, label in enumerate(labels):
             self.output_layer.neurons[index].set_delta(float(label))
-            self.output_layer.neurons[index].calculate_correction()
+            self.output_layer.neurons[index].calculate_correction(
+                apply_correction=self._should_apply_weight_correction()
+            )
+
+    def _should_apply_weight_correction(self):
+        return self.training == self.ONLINE_TRAINING
 
     def _correct_weights(self):
         for layer in reversed(self.layers[:-1]):
             for neuron in layer.neurons:
                 neuron.calculate_delta()
-                neuron.calculate_correction()
+                neuron.calculate_correction(
+                    apply_correction=self._should_apply_weight_correction()
+                )
