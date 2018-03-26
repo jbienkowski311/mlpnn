@@ -1,4 +1,5 @@
 from src.Factories.LayerFactory import LayerFactory
+from src.Functions.Sigmoid import Sigmoid
 from src.Structure.MLP import MLP
 
 
@@ -19,4 +20,4 @@ class MLPFactory(object):
                 layers[index].connect_input(layers[index - 1])
                 layers[index].connect_output(layers[index + 1])
 
-        return MLP(layers, training=training_strategy)
+        return MLP(layers, Sigmoid(), training=training_strategy)

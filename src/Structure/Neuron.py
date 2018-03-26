@@ -29,31 +29,24 @@ class Neuron(object):
             )
         )
 
-    def calculate_output(self):
-        self.output = self._activation_function(self.weighted_sum)
+    def calculate_output(self, activation_function, beta=0.005):
+        self.output = activation_function(self.weighted_sum, beta)
 
     def set_delta(self, label):
         self.delta = label - self.output
 
-    def calculate_delta(self):
+    def calculate_delta(self, derivative_function):
         self.delta = sum(
             map(
                 lambda synapse:
-                synapse.next.delta * synapse.weight * (1 - synapse.next.output) * synapse.next.output,
+                synapse.next.delta * synapse.weight * derivative_function(synapse.next.output),
                 self.output_connections
             )
         )
 
-    def calculate_correction(self, apply_correction=False, learning_rate=0.05):
+    def calculate_correction(self, derivative_function, apply_correction=False, learning_rate=0.05):
         for synapse in self.input_connections:
-            weight_correction = learning_rate * self.delta * (1 - self.output) * self.output * synapse.previous.output
+            weight_correction = learning_rate * self.delta * derivative_function(self.output) * synapse.previous.output
             synapse.store_weight(weight_correction)
             if apply_correction:
                 synapse.update_weight()
-
-    def apply_correction(self):
-        for synapse in self.input_connections:
-            synapse.update_weight()
-
-    def _activation_function(self, x, beta=0.005):
-        return 1 / (1 + exp(-beta * x))

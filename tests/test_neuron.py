@@ -42,7 +42,7 @@ class NeuronTest(unittest.TestCase):
         neuron.delta = 0.2
         self.neuron.output_connections[0].weight = 0.1
 
-        self.neuron.calculate_delta()
+        self.neuron.calculate_delta(lambda x: x * (1 - x))
 
         self.assertEqual(0.005, round(self.neuron.delta, ndigits=5))
 

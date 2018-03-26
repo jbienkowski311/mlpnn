@@ -2,6 +2,7 @@ import unittest
 
 from src.Factories.LayerFactory import LayerFactory
 from src.Factories.MLPFactory import MLPFactory
+from src.Functions.Sigmoid import Sigmoid
 from src.Structure.MLP import MLP
 
 
@@ -9,7 +10,7 @@ class LayerTest(unittest.TestCase):
     def test_mlp_creation(self):
         layers = [LayerFactory.create(2), LayerFactory.create(2)]
 
-        mlp = MLP(layers)
+        mlp = MLP(layers, Sigmoid())
 
         self.assertEqual(2, len(mlp.layers))
 
@@ -19,7 +20,7 @@ class LayerTest(unittest.TestCase):
         layer3 = LayerFactory.create(3)
         layers = [layer1, layer2, layer3]
 
-        mlp = MLP(layers)
+        mlp = MLP(layers, Sigmoid())
 
         self.assertEqual(layer1, mlp.input_layer)
         self.assertEqual(layer3, mlp.output_layer)

@@ -7,10 +7,10 @@ class Samples(object):
         self.raw_data = InputHandler.handle(file, shuffle_data)
 
     def data(self):
-        return [*map(lambda data: data[:-1], self.raw_data)]
+        return list(map(lambda data: data[:-1], self.raw_data))
 
     def labels(self):
-        return [*map(lambda data: self._label(data[-1]).pop()['output'], self.raw_data)]
+        return list(map(lambda data: self._label(data[-1]).pop()['output'], self.raw_data))
 
     def input_neurons(self):
         return len(self.raw_data[-1])
@@ -53,4 +53,4 @@ class Samples(object):
         return list(filter(lambda name: name['name'] == class_name, self.classes()))
 
     def _class_names(self):
-        return [*map(lambda data: data[-1], self.raw_data)]
+        return list(map(lambda data: data[-1], self.raw_data))
