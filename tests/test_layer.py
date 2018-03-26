@@ -1,6 +1,6 @@
 import unittest
 
-from src.Factories.LayerFactory import LayerFactory
+from mlpnn.Factories.LayerFactory import LayerFactory
 
 
 class LayerTest(unittest.TestCase):

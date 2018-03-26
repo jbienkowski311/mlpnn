@@ -1,6 +1,6 @@
 from math import exp
 
-from src.Factories.SynapseFactory import SynapseFactory
+from mlpnn.Factories.SynapseFactory import SynapseFactory
 
 
 class Neuron(object):

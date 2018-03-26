@@ -1,6 +1,6 @@
 from math import tanh
 
-from src.Functions.Function import Function
+from mlpnn.Functions.Function import Function
 
 
 class HyperbolicTangent(Function):

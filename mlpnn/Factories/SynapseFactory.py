@@ -1,5 +1,5 @@
-from src.Structure.Synapse import Synapse
-from src.Utils.SynapseHelper import SynapseHelper
+from mlpnn.Structure.Synapse import Synapse
+from mlpnn.Utils.SynapseHelper import SynapseHelper
 
 
 class SynapseFactory(object):

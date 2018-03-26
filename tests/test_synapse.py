@@ -1,7 +1,7 @@
 import unittest
 
-from src.Structure.Neuron import Neuron
-from src.Structure.Synapse import Synapse
+from mlpnn.Structure.Neuron import Neuron
+from mlpnn.Structure.Synapse import Synapse
 
 
 class LayerTest(unittest.TestCase):

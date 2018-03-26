@@ -1,8 +1,8 @@
-from src.Factories.MLPFactory import MLPFactory
-from src.Functions.HyperbolicTangent import HyperbolicTangent
-from src.Structure.MLP import MLP
-from src.Utils.File import File
-from src.Utils.Samples import Samples
+from mlpnn.Factories.MLPFactory import MLPFactory
+from mlpnn.Functions.HyperbolicTangent import HyperbolicTangent
+from mlpnn.Structure.MLP import MLP
+from mlpnn.Utils.File import File
+from mlpnn.Utils.Samples import Samples
 
 if __name__ == '__main__':
     file = File('/data/wine.csv')

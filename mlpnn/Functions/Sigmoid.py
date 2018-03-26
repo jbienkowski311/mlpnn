@@ -1,6 +1,6 @@
 from math import exp
 
-from src.Functions.Function import Function
+from mlpnn.Functions.Function import Function
 
 
 class Sigmoid(Function):

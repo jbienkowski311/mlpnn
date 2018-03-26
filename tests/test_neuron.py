@@ -1,8 +1,8 @@
 import unittest
 from random import randint
 
-from src.Factories.NeuronFactory import NeuronFactory
-from src.Structure.Layer import Layer
+from mlpnn.Factories.NeuronFactory import NeuronFactory
+from mlpnn.Structure.Layer import Layer
 
 
 class NeuronTest(unittest.TestCase):

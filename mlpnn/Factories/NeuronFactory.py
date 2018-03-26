@@ -1,4 +1,4 @@
-from src.Structure.Neuron import Neuron
+from mlpnn.Structure.Neuron import Neuron
 
 
 class NeuronFactory(object):

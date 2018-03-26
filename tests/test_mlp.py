@@ -1,9 +1,9 @@
 import unittest
 
-from src.Factories.LayerFactory import LayerFactory
-from src.Factories.MLPFactory import MLPFactory
-from src.Functions.Sigmoid import Sigmoid
-from src.Structure.MLP import MLP
+from mlpnn.Factories.LayerFactory import LayerFactory
+from mlpnn.Factories.MLPFactory import MLPFactory
+from mlpnn.Functions.Sigmoid import Sigmoid
+from mlpnn.Structure.MLP import MLP
 
 
 class LayerTest(unittest.TestCase):

@@ -1,9 +1,8 @@
-from src.Factories.MLPFactory import MLPFactory
-from src.Functions.Sigmoid import Sigmoid
-from src.Functions.HyperbolicTangent import HyperbolicTangent
-from src.Structure.MLP import MLP
-from src.Utils.File import File
-from src.Utils.NormalizedSamples import NormalizedSamples
+from mlpnn.Factories.MLPFactory import MLPFactory
+from mlpnn.Functions.Sigmoid import Sigmoid
+from mlpnn.Structure.MLP import MLP
+from mlpnn.Utils.File import File
+from mlpnn.Utils.NormalizedSamples import NormalizedSamples
 
 if __name__ == '__main__':
     file = File('/data/iris.csv')

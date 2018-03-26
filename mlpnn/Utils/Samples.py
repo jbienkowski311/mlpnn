@@ -1,4 +1,4 @@
-from src.Utils.InputHandler import InputHandler
+from mlpnn.Utils.InputHandler import InputHandler
 
 
 class Samples(object):

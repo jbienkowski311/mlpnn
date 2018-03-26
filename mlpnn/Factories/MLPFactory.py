@@ -1,6 +1,6 @@
-from src.Factories.LayerFactory import LayerFactory
-from src.Functions.Sigmoid import Sigmoid
-from src.Structure.MLP import MLP
+from mlpnn.Factories.LayerFactory import LayerFactory
+from mlpnn.Functions.Sigmoid import Sigmoid
+from mlpnn.Structure.MLP import MLP
 
 
 class MLPFactory(object):
