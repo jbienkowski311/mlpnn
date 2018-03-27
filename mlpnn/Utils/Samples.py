@@ -13,7 +13,7 @@ class Samples(object):
         return list(map(lambda data: self._label(data[-1]).pop()['output'], self.raw_data))
 
     def input_neurons(self):
-        return len(self.raw_data[-1])
+        return len(self.raw_data[-1])-1
 
     def output_neurons(self):
         return len(self.labels()[-1])
