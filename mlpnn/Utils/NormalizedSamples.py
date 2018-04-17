@@ -11,7 +11,7 @@ class NormalizedSamples(Samples):
         for index, sample in enumerate(data):
             sample = self._cast_to_float(sample)
             min_val, max_val = self._get_extremas(sample)
-            data[index] = [(i-min_val)/(max_val-min_val) for i in sample]
+            data[index] = [(i - min_val) / (max_val - min_val) for i in sample]
 
         return data
 

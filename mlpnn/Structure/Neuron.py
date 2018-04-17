@@ -1,5 +1,3 @@
-from math import exp
-
 from mlpnn.Factories.SynapseFactory import SynapseFactory
 
 

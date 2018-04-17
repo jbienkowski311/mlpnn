@@ -1,7 +1,10 @@
 from operator import itemgetter
 
+from mlpnn.Abstracts.Model import Model
+from mlpnn.Utils.ModelService import ModelService
 
-class MLP(object):
+
+class MLPNN(Model):
     ONLINE_TRAINING = 1
     OFFLINE_TRAINING = 2
 
@@ -15,6 +18,7 @@ class MLP(object):
         self.learning_rate = 0.01
         self.update_learning_rate = False
         self._last_sample = False
+        self._service = ModelService()
 
     def use(self, activation_function):
         self.activation_function = activation_function
@@ -54,6 +58,13 @@ class MLP(object):
         self._feedforward(input_data)
 
         return self.get_output()
+
+    @staticmethod
+    def load(model_file):
+        return ModelService().load(model_file)
+
+    def save(self, model_file):
+        self._service.save(self, model_file)
 
     def get_output(self):
         raw_output = self.get_raw_output()

@@ -1,5 +1,4 @@
 import unittest
-from random import randint
 
 from mlpnn.Factories.NeuronFactory import NeuronFactory
 from mlpnn.Structure.Layer import Layer

@@ -1,11 +1,11 @@
 from mlpnn.Factories.LayerFactory import LayerFactory
 from mlpnn.Functions.Sigmoid import Sigmoid
-from mlpnn.Structure.MLP import MLP
+from mlpnn.Structure.MLPNN import MLPNN
 
 
-class MLPFactory(object):
+class MLPNNFactory(object):
     @staticmethod
-    def create(neurons_list, training_strategy=MLP.ONLINE_TRAINING):
+    def create(neurons_list, training_strategy=MLPNN.ONLINE_TRAINING):
         layers = list()
 
         for number_of_neurons in neurons_list:
@@ -20,4 +20,4 @@ class MLPFactory(object):
                 layers[index].connect_input(layers[index - 1])
                 layers[index].connect_output(layers[index + 1])
 
-        return MLP(layers, Sigmoid(), training=training_strategy)
+        return MLPNN(layers, Sigmoid(), training=training_strategy)
