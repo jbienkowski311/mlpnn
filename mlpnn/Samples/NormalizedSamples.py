@@ -1,4 +1,4 @@
-from mlpnn.Utils.Samples import Samples
+from mlpnn.Samples.Samples import Samples
 
 
 class NormalizedSamples(Samples):

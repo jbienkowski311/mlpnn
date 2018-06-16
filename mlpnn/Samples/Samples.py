@@ -1,4 +1,4 @@
-from mlpnn.Utils.InputHandler import InputHandler
+from mlpnn.Import.CsvImporter import InputHandler
 
 
 class Samples(object):
