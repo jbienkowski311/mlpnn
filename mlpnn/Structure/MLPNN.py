@@ -1,18 +1,15 @@
-from operator import itemgetter
-
 from mlpnn.Abstracts.Model import Model
+from mlpnn.Structure.InputLayer import InputLayer
+from mlpnn.Structure.OutputLayer import OutputLayer
 from mlpnn.Utils.ModelService import ModelService
 
 
 class MLPNN(Model):
-    ONLINE_TRAINING = 1
-    OFFLINE_TRAINING = 2
-
-    def __init__(self, layers, activation_function, bias_node=False, training=ONLINE_TRAINING):
+    def __init__(self, layers, activation_function, bias_node=False, training=Model.ONLINE_TRAINING):
         self.bias_node = bias_node
         self.layers = layers
-        self.input_layer = layers[0]
-        self.output_layer = layers[-1]
+        self.input_layer = InputLayer(layers[0])
+        self.output_layer = OutputLayer(layers[-1])
         self.training = training
         self.activation_function = activation_function
         self.beta = 1.0
@@ -74,16 +71,10 @@ class MLPNN(Model):
         self._service.save(self, model_file)
 
     def get_output(self):
-        raw_output = self.get_raw_output()
-
-        index, _ = max(enumerate(raw_output), key=itemgetter(1))
-        output = [0] * len(raw_output)
-        output[index] = 1
-
-        return output
+        return self.output_layer.get_output()
 
     def get_raw_output(self):
-        return list(map(lambda neuron: neuron.output, self.output_layer.neurons))
+        return self.output_layer.get_raw_output()
 
     def _feedforward(self, train_data):
         self._set_input(train_data)
@@ -93,12 +84,8 @@ class MLPNN(Model):
         self._set_deltas(train_labels)
         self._correct_weights()
 
-    def _set_input(self, train_sample):
-        for index, value in enumerate(train_sample):
-            if self.bias_node and index == 0:
-                self.input_layer.neurons[index].output = 1
-                continue
-            self.input_layer.neurons[index].output = float(value)
+    def _set_input(self, train_data):
+        self.input_layer.set_input(train_data, self.bias_node)
 
     def _calculate_output(self):
         for index, layer in enumerate(self.layers[1:]):
@@ -107,13 +94,9 @@ class MLPNN(Model):
                 neuron.calculate_output(self.activation_function.function(), beta=self.beta)
 
     def _set_deltas(self, labels):
-        for index, label in enumerate(labels):
-            self.output_layer.neurons[index].set_delta(float(label))
-            self.output_layer.neurons[index].calculate_correction(
-                self.activation_function.derivative(),
-                apply_correction=self._should_apply_correction(),
-                learning_rate=self.learning_rate
-            )
+        self.output_layer.set_deltas(
+            labels, self.activation_function, self._should_apply_correction(), self.learning_rate
+        )
 
     def _correct_weights(self):
         for layer in reversed(self.layers[:-1]):

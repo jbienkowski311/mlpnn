@@ -4,8 +4,8 @@ import unittest
 from mlpnn.Factories.LayerFactory import LayerFactory
 from mlpnn.Factories.MLPNNFactory import MLPNNFactory
 from mlpnn.Functions.Sigmoid import Sigmoid
-from mlpnn.Structure.MLPNN import MLPNN
 from mlpnn.Import.File import File
+from mlpnn.Structure.MLPNN import MLPNN
 
 
 class LayerTest(unittest.TestCase):
@@ -24,8 +24,8 @@ class LayerTest(unittest.TestCase):
 
         mlpnn = MLPNN(layers, Sigmoid())
 
-        self.assertEqual(layer1, mlpnn.input_layer)
-        self.assertEqual(layer3, mlpnn.output_layer)
+        self.assertEqual(layer1, mlpnn.input_layer.layer)
+        self.assertEqual(layer3, mlpnn.output_layer.layer)
 
     def test_mlpnn_structure(self):
         mlpnn = MLPNNFactory.create([2, 3, 2])
