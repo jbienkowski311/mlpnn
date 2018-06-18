@@ -1,7 +1,6 @@
 from mlpnn.Abstracts.Model import Model
 from mlpnn.Structure.InputLayer import InputLayer
 from mlpnn.Structure.OutputLayer import OutputLayer
-from mlpnn.Utils.ModelService import ModelService
 
 
 class MLPNN(Model):
@@ -17,7 +16,6 @@ class MLPNN(Model):
         self.update_learning_rate = False
         self._debug = False
         self._last_sample = False
-        self._service = ModelService()
 
     def use(self, activation_function):
         self.activation_function = activation_function
@@ -62,13 +60,6 @@ class MLPNN(Model):
         self._feedforward(input_data)
 
         return self.get_output()
-
-    @staticmethod
-    def load(model_file):
-        return ModelService().load(model_file)
-
-    def save(self, model_file):
-        self._service.save(self, model_file)
 
     def get_output(self):
         return self.output_layer.get_output()

@@ -1,4 +1,6 @@
-from abc import ABCMeta, abstractmethod
+from abc import ABCMeta
+
+from mlpnn.Utils.ModelHandler import ModelHandler
 
 
 class Model(object):
@@ -8,10 +10,8 @@ class Model(object):
     __metaclass__ = ABCMeta
 
     @staticmethod
-    @abstractmethod
     def load(model_file):
-        pass
+        return ModelHandler.load(model_file)
 
-    @abstractmethod
     def save(self, model_file):
-        pass
+        ModelHandler.save(self, model_file)
