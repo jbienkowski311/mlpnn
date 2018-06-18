@@ -9,7 +9,7 @@ if __name__ == '__main__':
     file = File('/data/ecoli.csv')
     model = File('/models/ecoli.pkl')
 
-    data = Samples(file, kfold_ratio=0.75, shuffle_data=True)
+    data = Samples(file, ratio=0.75, shuffle_data=True)
 
     layers = [data.input_neurons(), 3, 5, data.output_neurons()]
 
