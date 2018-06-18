@@ -12,6 +12,20 @@ class Layer(object):
         self.output_layers.append(layer)
         self._create_connections(layer)
 
+    def feed_forward(self, activation_function, beta):
+        for neuron in self.neurons:
+            neuron.calculate_sum()
+            neuron.calculate_output(activation_function.function(), beta=beta)
+
+    def back_propagate(self, activation_function, apply_correction, learning_rate):
+        for neuron in self.neurons:
+            neuron.calculate_delta(activation_function.derivative())
+            neuron.calculate_correction(
+                activation_function.derivative(),
+                apply_correction=apply_correction,
+                learning_rate=learning_rate
+            )
+
     def _attach_neurons(self):
         for neuron in self.neurons:
             neuron.belongs_to(self)
