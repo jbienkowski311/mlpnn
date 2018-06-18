@@ -5,8 +5,11 @@ from mlpnn.Structure.MLPNN import MLPNN
 
 class MLPNNFactory(object):
     @staticmethod
-    def create(neurons_list, training_strategy=MLPNN.ONLINE_TRAINING):
+    def create(neurons_list, use_bias_node=False, training_strategy=MLPNN.ONLINE_TRAINING):
         layers = list()
+
+        if use_bias_node:
+            neurons_list[0] += 1
 
         for number_of_neurons in neurons_list:
             layers.append(LayerFactory.create(number_of_neurons))
@@ -20,4 +23,4 @@ class MLPNNFactory(object):
                 layers[index].connect_input(layers[index - 1])
                 layers[index].connect_output(layers[index + 1])
 
-        return MLPNN(layers, Sigmoid(), training=training_strategy)
+        return MLPNN(layers, Sigmoid(), bias_node=use_bias_node, training=training_strategy)

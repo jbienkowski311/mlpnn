@@ -2,8 +2,8 @@ from random import uniform, seed
 
 
 class SynapseHelper(object):
-    START_RANGE = -0.5
-    END_RANGE = 0.5
+    START_RANGE = -2.0
+    END_RANGE = 2.0
 
     @staticmethod
     def random_weight():

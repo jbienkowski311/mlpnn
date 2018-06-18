@@ -8,7 +8,8 @@ class MLPNN(Model):
     ONLINE_TRAINING = 1
     OFFLINE_TRAINING = 2
 
-    def __init__(self, layers, activation_function, training=ONLINE_TRAINING):
+    def __init__(self, layers, activation_function, bias_node=False, training=ONLINE_TRAINING):
+        self.bias_node = bias_node
         self.layers = layers
         self.input_layer = layers[0]
         self.output_layer = layers[-1]
@@ -17,6 +18,7 @@ class MLPNN(Model):
         self.beta = 1.0
         self.learning_rate = 0.01
         self.update_learning_rate = False
+        self._debug = False
         self._last_sample = False
         self._service = ModelService()
 
@@ -44,6 +46,11 @@ class MLPNN(Model):
 
     def set_beta(self, beta):
         self.beta = beta
+
+        return self
+
+    def debug(self):
+        self._debug = True
 
         return self
 
@@ -88,6 +95,9 @@ class MLPNN(Model):
 
     def _set_input(self, train_sample):
         for index, value in enumerate(train_sample):
+            if self.bias_node and index == 0:
+                self.input_layer.neurons[index].output = 1
+                continue
             self.input_layer.neurons[index].output = float(value)
 
     def _calculate_output(self):
