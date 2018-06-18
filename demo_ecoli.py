@@ -2,7 +2,7 @@ from mlpnn.Factories.MLPNNFactory import MLPNNFactory
 from mlpnn.Functions.Sigmoid import Sigmoid
 from mlpnn.Import.File import File
 from mlpnn.Samples.Samples import Samples
-from mlpnn.Structure.MLPNN import MLPNN
+from mlpnn.Networks.MLPNN import MLPNN
 from mlpnn.Testing.Accuracy import Accuracy
 
 if __name__ == '__main__':

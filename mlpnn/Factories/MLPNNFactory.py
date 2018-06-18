@@ -1,6 +1,6 @@
 from mlpnn.Factories.LayerFactory import LayerFactory
 from mlpnn.Functions.Sigmoid import Sigmoid
-from mlpnn.Structure.MLPNN import MLPNN
+from mlpnn.Networks.MLPNN import MLPNN
 
 
 class MLPNNFactory(object):

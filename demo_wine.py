@@ -2,7 +2,7 @@ from mlpnn.Factories.MLPNNFactory import MLPNNFactory
 from mlpnn.Functions.Step import Step
 from mlpnn.Import.File import File
 from mlpnn.Samples.NormalizedSamples import NormalizedSamples
-from mlpnn.Structure.MLPNN import MLPNN
+from mlpnn.Networks.MLPNN import MLPNN
 from mlpnn.Testing.Accuracy import Accuracy
 
 if __name__ == '__main__':

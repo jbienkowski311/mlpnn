@@ -5,7 +5,7 @@ from mlpnn.Factories.LayerFactory import LayerFactory
 from mlpnn.Factories.MLPNNFactory import MLPNNFactory
 from mlpnn.Functions.Sigmoid import Sigmoid
 from mlpnn.Import.File import File
-from mlpnn.Structure.MLPNN import MLPNN
+from mlpnn.Networks.MLPNN import MLPNN
 
 
 class LayerTest(unittest.TestCase):

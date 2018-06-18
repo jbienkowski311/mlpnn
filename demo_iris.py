@@ -1,6 +1,6 @@
 from mlpnn.Factories.MLPNNFactory import MLPNNFactory
 from mlpnn.Functions.Sigmoid import Sigmoid
-from mlpnn.Structure.MLPNN import MLPNN
+from mlpnn.Networks.MLPNN import MLPNN
 from mlpnn.Import.File import File
 from mlpnn.Samples.NormalizedSamples import NormalizedSamples
 from mlpnn.Testing.Accuracy import Accuracy
